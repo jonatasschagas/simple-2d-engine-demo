@@ -50,7 +50,8 @@ file(GLOB_RECURSE GLM_CODE ${GLM}/*.h ${GLM}/*.hpp ${GLM}/*.inl)
 list(APPEND SOURCE_FILES ${GLM_CODE})
 list(APPEND SOURCE_FILES ${STB}/stb_image.h)
 
-message(SOURCE_FILES)
+# copying assets folder to the "assets" folder from Android
+# so we can read the images/shader files
 file(MAKE_DIRECTORY ${PROJECT_SOURCE_DIR}/projects/android/app/src/main/assets)
 file(COPY ${PROJECT_SOURCE_DIR}/assets DESTINATION ${PROJECT_SOURCE_DIR}projects/android/app/src/main/assets)
 

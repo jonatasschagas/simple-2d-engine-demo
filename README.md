@@ -50,5 +50,7 @@ If you use **VS Code** there's a launch configuration called **(lldb) Launch Sam
 
 ### Android
 
-Install **Android Studio** on your system, and open the project at ``projects/android/``.
+Install **Android Studio** on your system, open it, and open the project at ``projects/android/``. Then run "Build".
+
+The cmake file "CMakeLists.txt" is located at: ``projects/android/app/src/main/cpp``. There you can find all the build configuration.
 
