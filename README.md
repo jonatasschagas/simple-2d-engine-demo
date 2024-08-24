@@ -12,6 +12,7 @@ In this demo you can see:
 - How to read player input (keyboard or touch screen)
 - How to build a *scene graph* where the children sprites behave according to the position/scale/orientation of parent Sprites
 - How to setup and use Shaders
+- How to play songs and sounds
 
 When checking out the repo, make sure to pull the submodules too:
 
@@ -36,6 +37,8 @@ Once homebrew is installed, use the terminal to install the following dependenci
 ```sh
 brew install cmake
 brew install glfw
+brew install sdl2
+brew install sdl2_mixer
 ```
 
 After installing all the dependencies, to build and run the game, use **cmake** and **make**:
@@ -53,4 +56,8 @@ If you use **VS Code** there's a launch configuration called **(lldb) Launch Sam
 Install **Android Studio** on your system, open it, and open the project at ``projects/android/``. Then run "Build".
 
 The cmake file "CMakeLists.txt" is located at: ``projects/android/app/src/main/cpp``. There you can find all the build configuration.
+
+### Credits
+
+Music: credits to https://patrickdearteaga.com. 
 

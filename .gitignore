@@ -61,6 +61,8 @@ build/*
 local.properties
 .idea
 .gradle
+projects/osx/assets
 projects/android/app/src/main/assets/
 projects/android/app/src/main/assets/assets
 projects/android/app/src/main/assets/assets/
+.DS_Store

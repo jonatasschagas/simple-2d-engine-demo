@@ -3,8 +3,8 @@
 #include "OSXResourceProvider.hpp"
 #include "OpenGLGraphicsManager.hpp"
 #include "OpenGLRenderer.h"
+#include "SDLSoundManager.hpp"
 #include "SampleGame.hpp"
-#include "sound/impl/MuteSoundManager.hpp"
 #include <string>
 
 using std::string;
@@ -52,10 +52,10 @@ int main(int argc, char** argv) {
     }
   });
 
-  MuteSoundManager muteSoundManager;
+  SDLSoundManager sdlSoundManager;
 
   // the game
-  SampleGame sampleGame(openGLGraphicsManager, muteSoundManager, inputManager);
+  SampleGame sampleGame(openGLGraphicsManager, sdlSoundManager, inputManager);
   int code = mainLoopOpenGLRenderer(pWindow, sampleGame, inputManager);
 
   return code;

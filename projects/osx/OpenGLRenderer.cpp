@@ -86,6 +86,8 @@ int mainLoopOpenGLRenderer(GLFWwindow* pWindow, Game& rGame,
 
     processInput(pWindow);
 
+    rGame.processSounds();
+
     render(rGame);
 
     glfwSwapBuffers(pWindow);

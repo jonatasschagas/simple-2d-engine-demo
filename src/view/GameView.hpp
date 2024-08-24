@@ -24,12 +24,15 @@ class GameView : public View {
 
   void renderSprite(GraphicsManager& rGraphicsManager) override;
 
+  void processSounds(SoundManager& rSoundManager) override;
+
  private:
   StarField m_starField;
   Rocket m_rocket;
   ViewManager* m_pViewManager = nullptr;
-  glm::vec2 m_screenSize = {0,0};
+  glm::vec2 m_screenSize = {0, 0};
   float m_speedToMove = 0;
+  bool m_songInitialized = false;
 };
 
 #endif /* GameView_hpp */

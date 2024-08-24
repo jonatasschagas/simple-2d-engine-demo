@@ -31,6 +31,7 @@ set(ASSETS ${PROJECT_SOURCE_DIR}/assets)
 # ENGINE STUFF
 set(OPENGL_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/graphics/opengl)
 set(INPUT_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/input/glfw)
+set(SOUND_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/sounds/sdl)
 set(RESOURCE_PROVIDER_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/disk/osx)
 set(ENGINE_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/engine)
 
@@ -52,7 +53,7 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
 file(GLOB SOURCE_FILES *.cpp)
 
 # adding opengl backend source files
-file(GLOB BACKEND_FILES ${OPENGL_BACKEND_IMPL}/*.cpp ${INPUT_BACKEND_IMPL}/*.cpp ${RESOURCE_PROVIDER_BACKEND_IMPL}/*.cpp)
+file(GLOB BACKEND_FILES ${OPENGL_BACKEND_IMPL}/*.cpp ${INPUT_BACKEND_IMPL}/*.cpp ${RESOURCE_PROVIDER_BACKEND_IMPL}/*.cpp ${SOUND_BACKEND_IMPL}/*.cpp)
 list(APPEND SOURCE_FILES ${BACKEND_FILES}) 
 
 # adding sample game source files
@@ -84,6 +85,8 @@ source_group(TREE "${PROJECT_SOURCE_DIR}/../" PREFIX "Source Files" FILES ${SOUR
 # Find the packages we need.
 find_package(GLFW3 REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 # adding code to the executable
 add_executable(simple-2d-engine-demo ${SOURCE_FILES})
@@ -98,6 +101,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_GENERATE_SCHEME TRUE XCOD
 
 
 # include
-include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${GLM} ${RAPID_JSON}/include/ ${ENGINE_IMPL} ${OPENGL_BACKEND_IMPL} ${RESOURCE_PROVIDER_BACKEND_IMPL}  ${OPENGL_INCLUDE_DIR} ${INPUT_BACKEND_IMPL} ${GLUT_INCLUDE_DIR} ${SAMPLE_GAME} ${STB} ${GLAD}/includes ${GLFW3_INCLUDE_DIR})
+include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${GLM} ${RAPID_JSON}/include/ ${ENGINE_IMPL} ${OPENGL_BACKEND_IMPL} ${RESOURCE_PROVIDER_BACKEND_IMPL}  ${OPENGL_INCLUDE_DIR} ${INPUT_BACKEND_IMPL} ${GLUT_INCLUDE_DIR} ${SAMPLE_GAME} ${STB} ${GLAD}/includes ${GLFW3_INCLUDE_DIR} ${SOUND_BACKEND_IMPL})
 # link
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLFW3_LIBRARY} "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo")
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLFW3_LIBRARY} SDL2::SDL2 SDL2_mixer::SDL2_mixer "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo")
