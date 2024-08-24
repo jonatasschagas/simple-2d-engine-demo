@@ -9,7 +9,7 @@
 
 #include "SampleGame.hpp"
 #include "OpenGLGraphicsManager.hpp"
-#include "sound/impl/MuteSoundManager.hpp"
+#include  "AndroidSoundManager.hpp"
 #include "AndroidInputManager.hpp"
 #include "AndroidOut.h"
 #include "Utility.h"
@@ -55,7 +55,7 @@ Renderer::~Renderer() {
     delete m_pSampleGame;
     delete m_pGraphicsManager;
     delete m_pResourceProvider;
-    delete m_pMuteSoundManager;
+    delete m_pSoundManager;
     delete m_pInputManager;
 
     initializeMembers();
@@ -75,6 +75,7 @@ void Renderer::render() {
     double delta = (now - m_previousFrameMs)/1000.f;
 
     m_pSampleGame->update(delta);
+    m_pSampleGame->processSounds();
     m_pSampleGame->render();
 
     m_previousFrameMs = now;
@@ -171,12 +172,18 @@ void Renderer::updateRenderArea() {
     eglQuerySurface(m_display, m_surface, EGL_HEIGHT, &height);
 
     if (width != m_width || height != m_height) {
+
         m_width = width;
         m_height = height;
+
         glViewport(0, 0, width, height);
 
         AAssetManager* pAssetManager = m_pApp->activity->assetManager;
         m_pResourceProvider = new AndroidResourceProvider(pAssetManager);
+
+        if (m_pGraphicsManager != nullptr) {
+            delete m_pGraphicsManager;
+        }
 
         m_pGraphicsManager = new OpenGLGraphicsManager(m_width, m_height, 100, 1, 1, *m_pResourceProvider);
         m_pGraphicsManager->loadShader("textured", "assets/shaders/android/sprite.vs", "assets/shaders/android/sprite.frag", *m_pResourceProvider);
@@ -184,11 +191,21 @@ void Renderer::updateRenderArea() {
         m_pGraphicsManager->loadShader("circle", "assets/shaders/android/circle.vs", "assets/shaders/android/circle.frag", *m_pResourceProvider);
         m_pGraphicsManager->initialize();
 
-        m_pMuteSoundManager = new MuteSoundManager();
+        if (m_pSoundManager != nullptr) {
+            delete m_pSoundManager;
+        }
+        m_pSoundManager = new AndroidSoundManager(m_pResourceProvider, 22050);
+
+        if (m_pInputManager != nullptr) {
+            delete m_pInputManager;
+        }
         m_pInputManager = new AndroidInputManager(m_pApp);
 
+        if (m_pSampleGame != nullptr) {
+            delete m_pSampleGame;
+        }
         m_pSampleGame = new SampleGame(*m_pGraphicsManager,
-                                       *m_pMuteSoundManager,
+                                       *m_pSoundManager,
                                        *m_pInputManager);
         m_pSampleGame->initialize();
     }

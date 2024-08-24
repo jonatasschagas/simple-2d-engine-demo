@@ -62,7 +62,7 @@ void GameView::renderSprite(GraphicsManager& rGraphicsManager) {
 
 void GameView::processSounds(SoundManager& rSoundManager) {
   if (!m_songInitialized) {
-    string const& soundName = "assets/sounds/intergalactic_odyssey.ogg";
+    string const& soundName = "assets/sounds/music.wav";
     rSoundManager.loadMusic(soundName);
     rSoundManager.playMusic(soundName);
     m_songInitialized = true;

@@ -17,8 +17,11 @@ project("samplegame")
 set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../)
 message(STATUS "PROJECT_SOURCE_DIR is: ${PROJECT_SOURCE_DIR}")
 
+set(ANDROID_STL "c++_shared")
+
 set(OPENGL_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/graphics/opengl)
 set(INPUT_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine//service-implementation/input/android)
+set(SOUNDS_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/sounds/android)
 set(RESOURCE_PROVIDER_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/disk/android)
 set(ENGINE_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/engine)
 set(UTILS_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/utils/android)
@@ -30,6 +33,7 @@ message(STATUS "ASSETS is: ${ASSETS}")
 # third party libs
 set(GLM ${PROJECT_SOURCE_DIR}/simple-2d-engine/third-party/glm)
 set(STB ${PROJECT_SOURCE_DIR}/simple-2d-engine/third-party/stb)
+set(AUDIO_FILE ${PROJECT_SOURCE_DIR}/simple-2d-engine/third-party/AudioFile)
 
 # adding source files
 set(SOURCE_FILES    main.cpp)
@@ -40,8 +44,10 @@ file(GLOB_RECURSE
         ${OPENGL_BACKEND_IMPL}/*.cpp
         ${RESOURCE_PROVIDER_IMPL}/*.cpp
         ${INPUT_BACKEND_IMPL}/*.cpp
+        ${SOUNDS_BACKEND_IMPL}/*.cpp
         ${ENGINE_IMPL}/*.cpp
         ${SAMPLE_GAME}/*.cpp
+        ${AUDIO_FILE}/AudioFile.h
         )
 list(APPEND SOURCE_FILES ${OTHER_MODULES_SOURCE_FILES})
 
@@ -82,6 +88,9 @@ find_library( # Sets the name of the path variable.
 
 find_package(game-activity REQUIRED CONFIG)
 
+# sound lib
+find_package(oboe REQUIRED CONFIG)
+
 # include
 include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
         ${GLM}
@@ -90,7 +99,9 @@ include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
         ${UTILS_IMPL}
         ${INPUT_BACKEND_IMPL}
         ${OPENGL_BACKEND_IMPL}
+        ${SOUNDS_BACKEND_IMPL}
         ${SAMPLE_GAME}
+        ${AUDIO_FILE}
         ${STB})
 
 
@@ -114,6 +125,8 @@ target_link_libraries( # Specifies the target library.
 
         # for AImageDecoder, to load images from resources
         jnigraphics
+
+        oboe::oboe
 
         # Links the target library to the log library
         # included in the NDK.

@@ -4,7 +4,7 @@
 #include <EGL/egl.h>
 
 struct android_app;
-class MuteSoundManager;
+class SoundManager;
 class OpenGLGraphicsManager;
 class ResourceProvider;
 class InputManager;
@@ -64,16 +64,17 @@ private:
 
     SampleGame* m_pSampleGame;
     OpenGLGraphicsManager* m_pGraphicsManager;
-    MuteSoundManager* m_pMuteSoundManager;
+    SoundManager* m_pSoundManager;
     ResourceProvider* m_pResourceProvider;
     InputManager* m_pInputManager;
     double m_previousFrameMs;
+    bool m_initialized = false;
 
     void initializeMembers()
     {
         m_pSampleGame = nullptr;
         m_pGraphicsManager = nullptr;
-        m_pMuteSoundManager = nullptr;
+        m_pSoundManager = nullptr;
         m_pInputManager = nullptr;
         m_pResourceProvider = nullptr;
         m_previousFrameMs = 0;
