@@ -48,4 +48,7 @@ make
 
 If you use **VS Code** there's a launch configuration called **(lldb) Launch Sample Game** that does the steps described above for you.
 
+### Android
+
+Install **Android Studio** on your system, and open the project at ``projects/android/``.
 

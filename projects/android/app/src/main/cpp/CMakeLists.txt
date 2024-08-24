@@ -14,18 +14,22 @@ project("samplegame")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-set(PROJECT_SOURCE_DIR ../../../../../..)
-set(OPENGL_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/service-implementation/graphics/opengl)
-set(INPUT_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/service-implementation/input/android)
-set(RESOURCE_PROVIDER_IMPL ${PROJECT_SOURCE_DIR}/service-implementation/disk/android)
-set(ENGINE_IMPL ${PROJECT_SOURCE_DIR}/engine)
-set(UTILS_IMPL ${PROJECT_SOURCE_DIR}/service-implementation/utils/android)
-set(ASSETS ${PROJECT_SOURCE_DIR}/projects/assets)
-set(SAMPLE_GAME ${PROJECT_SOURCE_DIR}/projects/sample-game)
+set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../)
+message(STATUS "PROJECT_SOURCE_DIR is: ${PROJECT_SOURCE_DIR}")
+
+set(OPENGL_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/graphics/opengl)
+set(INPUT_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine//service-implementation/input/android)
+set(RESOURCE_PROVIDER_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/disk/android)
+set(ENGINE_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/engine)
+set(UTILS_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/utils/android)
+set(ASSETS ${PROJECT_SOURCE_DIR}/assets)
+set(SAMPLE_GAME ${PROJECT_SOURCE_DIR}/src)
+
+message(STATUS "ASSETS is: ${ASSETS}")
 
 # third party libs
-set(GLM ${PROJECT_SOURCE_DIR}/third-party/glm)
-set(STB ${PROJECT_SOURCE_DIR}/third-party/stb)
+set(GLM ${PROJECT_SOURCE_DIR}/simple-2d-engine/third-party/glm)
+set(STB ${PROJECT_SOURCE_DIR}/simple-2d-engine/third-party/stb)
 
 # adding source files
 set(SOURCE_FILES    main.cpp)
@@ -45,6 +49,10 @@ list(APPEND SOURCE_FILES ${OTHER_MODULES_SOURCE_FILES})
 file(GLOB_RECURSE GLM_CODE ${GLM}/*.h ${GLM}/*.hpp ${GLM}/*.inl)
 list(APPEND SOURCE_FILES ${GLM_CODE})
 list(APPEND SOURCE_FILES ${STB}/stb_image.h)
+
+message(SOURCE_FILES)
+file(MAKE_DIRECTORY ${PROJECT_SOURCE_DIR}/projects/android/app/src/main/assets)
+file(COPY ${PROJECT_SOURCE_DIR}/assets DESTINATION ${PROJECT_SOURCE_DIR}projects/android/app/src/main/assets)
 
 add_library( # Sets the name of the library.
         samplegame
