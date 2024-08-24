@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "(lldb) Launch Sample Game",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/projects/osx/simple-2d-engine-demo",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/projects/osx/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "make"
+        }
+    ]
+}
