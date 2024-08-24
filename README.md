@@ -1,6 +1,19 @@
 ## simple 2d engine demo
 
-This repo is a demo of how to use the [simple 2d engine](https://github.com/jonatasschagas/simple-2d-engine). When checking out the repo, make sure to pull the submodules too:
+This repo is a demo of how to use the [simple 2d engine](https://github.com/jonatasschagas/simple-2d-engine). 
+
+![Demo](demo-engine-osx.gif)
+
+In this demo you can see:
+ - How to wire up the engine by providing the right implementation of the "manager" classes depending on the platform you're running the engine on. Manager classes are: GraphicsManager, SoundManager, InputManager and ResourceManager. 
+- How to setup *views*
+- How to move, rotate and scale Sprites
+- How to setup textured Sprites
+- How to read player input (keyboard or touch screen)
+- How to build a *scene graph* where the children sprites behave according to the position/scale/orientation of parent Sprites
+- How to setup and use Shaders
+
+When checking out the repo, make sure to pull the submodules too:
 
 ```sh
 git submodule update --init --recursive
