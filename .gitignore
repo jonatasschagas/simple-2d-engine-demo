@@ -47,6 +47,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+.cxx
 
 ### CMake Patch ###
 # External projects
@@ -56,3 +57,10 @@ _deps
 
 build
 build/*
+
+local.properties
+.idea
+.gradle
+projects/android/app/src/main/assets/
+projects/android/app/src/main/assets/assets
+projects/android/app/src/main/assets/assets/
