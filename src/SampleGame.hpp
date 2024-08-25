@@ -4,10 +4,7 @@
 #define SampleGame_hpp
 
 #include "view/Game.hpp"
-#include "view/ViewManager.hpp"
 #include <string>
-
-using std::string;
 
 class SampleGame : public Game {
  public:
@@ -17,12 +14,10 @@ class SampleGame : public Game {
 
   void initialize() override;
 
-  string const& getGameName() override;
+  std::string const& getGameName() override { return "Sample Game"; }
 
  private:
-   string m_gameName;
-
-  void initializeMembers() { m_gameName = "Sample Game"; }
+  void initializeMembers() {}
 };
 
 #endif /* SampleGame_hpp */

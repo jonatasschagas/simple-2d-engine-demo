@@ -16,5 +16,3 @@ void SampleGame::initialize() {
 
   switchView("game-view");
 }
-
-string const& SampleGame::getGameName() { return m_gameName; }

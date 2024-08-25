@@ -15,8 +15,6 @@ class Rocket : public TexturedSprite {
 
   void update(float delta) override;
 
-  void moveUp();
-  void moveDown();
   void moveLeft();
   void moveRight();
 
