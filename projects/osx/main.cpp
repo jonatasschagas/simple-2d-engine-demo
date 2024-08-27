@@ -40,6 +40,12 @@ int main(int argc, char** argv) {
                                    "assets/shaders/osx/circle.frag",
                                    resourceProvider);
 
+  openGLGraphicsManager.loadShader("text", "assets/shaders/osx/text.vs",
+                                   "assets/shaders/osx/text.frag",
+                                   resourceProvider);
+
+  openGLGraphicsManager.loadFont("assets/fonts/arcade_ya/ARCADE_N.TTF");
+
   GLFWInputManager inputManager(*pWindow);
 
   // maps GLFW key codes to InputKey values

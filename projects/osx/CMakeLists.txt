@@ -87,6 +87,7 @@ find_package(GLFW3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_mixer REQUIRED)
+find_package(Freetype REQUIRED)
 
 # adding code to the executable
 add_executable(simple-2d-engine-demo ${SOURCE_FILES})
@@ -99,8 +100,32 @@ add_custom_target(copy_assets
 add_dependencies(simple-2d-engine-demo copy_assets)
 set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_GENERATE_SCHEME TRUE XCODE_SCHEME_WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../)
 
-
 # include
-include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ${GLM} ${RAPID_JSON}/include/ ${ENGINE_IMPL} ${OPENGL_BACKEND_IMPL} ${RESOURCE_PROVIDER_BACKEND_IMPL}  ${OPENGL_INCLUDE_DIR} ${INPUT_BACKEND_IMPL} ${GLUT_INCLUDE_DIR} ${SAMPLE_GAME} ${STB} ${GLAD}/includes ${GLFW3_INCLUDE_DIR} ${SOUND_BACKEND_IMPL})
+include_directories(
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} 
+    ${GLM} 
+    ${RAPID_JSON}/include/ 
+    ${ENGINE_IMPL} 
+    ${OPENGL_BACKEND_IMPL} 
+    ${RESOURCE_PROVIDER_BACKEND_IMPL} 
+    ${OPENGL_INCLUDE_DIR} 
+    ${INPUT_BACKEND_IMPL} 
+    ${GLUT_INCLUDE_DIR} 
+    ${SAMPLE_GAME} 
+    ${STB} 
+    ${FREETYPE_INCLUDE_DIRS}
+    ${GLAD}/includes 
+    ${GLFW3_INCLUDE_DIR} 
+    ${SOUND_BACKEND_IMPL}
+)
+
 # link
-target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLFW3_LIBRARY} SDL2::SDL2 SDL2_mixer::SDL2_mixer "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo")
+target_link_libraries(
+    ${PROJECT_NAME} 
+    ${OPENGL_LIBRARIES} 
+    ${FREETYPE_LIBRARIES}
+    ${GLFW3_LIBRARY} 
+    SDL2::SDL2 
+    SDL2_mixer::SDL2_mixer 
+    "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo"
+)

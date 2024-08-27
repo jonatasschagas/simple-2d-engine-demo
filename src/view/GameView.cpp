@@ -1,13 +1,18 @@
 #include "GameView.hpp"
 #include "input/InputKey.hpp"
 
-GameView::GameView() : View(), m_starField(300, 0.001f), m_rocket(0.01f) {}
+GameView::GameView()
+    : View(),
+      m_starField(300, 0.001f),
+      m_rocket(0.01f),
+      m_demoTextSprite(1, glm::vec4(1, 1, 1, 1)) {}
 
 GameView::~GameView() {}
 
 void GameView::initialize(ViewManager* pViewManager) {
   addChild(&m_starField);
   addChild(&m_rocket);
+  addChild(&m_demoTextSprite);
 
   m_starField.setXY(0, 0);
   m_starField.setSize(100.f, 100.f);
@@ -15,8 +20,12 @@ void GameView::initialize(ViewManager* pViewManager) {
   m_rocket.setXY(25.f, 50.f);
   m_rocket.setSize(10.f, 15.f);
 
-  m_pViewManager = pViewManager;  // view manager should be use to transition to
-                                  // other game views
+  m_demoTextSprite.setXY(40, 10);
+  m_demoTextSprite.setSize(20.f, 8.f);
+  m_demoTextSprite.setText("Sample Game");
+
+  m_pViewManager = pViewManager;  // view manager should be use to
+                                  // transition to other game views
 }
 
 void GameView::update(float delta) {
@@ -26,6 +35,14 @@ void GameView::update(float delta) {
     m_rocket.moveRight();
   } else if (m_speedToMove < 0) {
     m_rocket.moveLeft();
+  }
+
+  m_demoTextAccumulatedDelta += delta;
+  if (m_demoTextAccumulatedDelta > m_demoTextSpeed) {
+    m_demoTextAccumulatedDelta = 0;
+    m_demoTextSprite.setColor(glm::vec4(rand() % 100 / 100.0f,
+                                        rand() % 100 / 100.0f,
+                                        rand() % 100 / 100.0f, 1));
   }
 }
 

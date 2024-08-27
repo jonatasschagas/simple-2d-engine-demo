@@ -18,6 +18,7 @@ set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../)
 message(STATUS "PROJECT_SOURCE_DIR is: ${PROJECT_SOURCE_DIR}")
 
 set(ANDROID_STL "c++_shared")
+add_definitions(-DANDROID) # Adds the macro ANDROID -> for #ifdef ANDROID to work
 
 set(OPENGL_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine/service-implementation/graphics/opengl)
 set(INPUT_BACKEND_IMPL ${PROJECT_SOURCE_DIR}/simple-2d-engine//service-implementation/input/android)
@@ -55,6 +56,15 @@ list(APPEND SOURCE_FILES ${OTHER_MODULES_SOURCE_FILES})
 file(GLOB_RECURSE GLM_CODE ${GLM}/*.h ${GLM}/*.hpp ${GLM}/*.inl)
 list(APPEND SOURCE_FILES ${GLM_CODE})
 list(APPEND SOURCE_FILES ${STB}/stb_image.h)
+
+# freetype
+include(FetchContent)
+FetchContent_Declare(
+        freetype
+        GIT_REPOSITORY https://github.com/freetype/freetype.git
+        GIT_TAG        VER-2-10-4
+)
+FetchContent_MakeAvailable(freetype)
 
 # copying assets folder to the "assets" folder from Android
 # so we can read the images/shader files
@@ -102,7 +112,8 @@ include_directories(${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
         ${SOUNDS_BACKEND_IMPL}
         ${SAMPLE_GAME}
         ${AUDIO_FILE}
-        ${STB})
+        ${STB}
+)
 
 
 # Specifies libraries CMake should link to your target library. You
@@ -126,7 +137,11 @@ target_link_libraries( # Specifies the target library.
         # for AImageDecoder, to load images from resources
         jnigraphics
 
+        # to play sounds
         oboe::oboe
+
+        # to render fonts
+        freetype
 
         # Links the target library to the log library
         # included in the NDK.

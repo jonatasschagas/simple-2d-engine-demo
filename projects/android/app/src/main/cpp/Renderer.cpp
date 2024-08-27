@@ -189,6 +189,8 @@ void Renderer::updateRenderArea() {
         m_pGraphicsManager->loadShader("textured", "assets/shaders/android/sprite.vs", "assets/shaders/android/sprite.frag", *m_pResourceProvider);
         m_pGraphicsManager->loadShader("colored", "assets/shaders/android/color.vs", "assets/shaders/android/color.frag", *m_pResourceProvider);
         m_pGraphicsManager->loadShader("circle", "assets/shaders/android/circle.vs", "assets/shaders/android/circle.frag", *m_pResourceProvider);
+        m_pGraphicsManager->loadShader("text", "assets/shaders/android/text.vs", "assets/shaders/android/text.frag", *m_pResourceProvider);
+        m_pGraphicsManager->loadFont("assets/fonts/arcade_ya/ARCADE_N.TTF");
         m_pGraphicsManager->initialize();
 
         if (m_pSoundManager != nullptr) {

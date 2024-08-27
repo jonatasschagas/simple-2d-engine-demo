@@ -2,6 +2,7 @@
 #ifndef GameView_hpp
 #define GameView_hpp
 
+#include "core/TextSprite.hpp"
 #include "objects/Rocket.hpp"
 #include "objects/StarField.hpp"
 #include "view/View.h"
@@ -33,6 +34,9 @@ class GameView : public View {
   glm::vec2 m_screenSize = {0, 0};
   float m_speedToMove = 0;
   bool m_songInitialized = false;
+  TextSprite m_demoTextSprite;
+  float m_demoTextAccumulatedDelta = 0.0f;
+  float m_demoTextSpeed = 0.5f;
 };
 
 #endif /* GameView_hpp */

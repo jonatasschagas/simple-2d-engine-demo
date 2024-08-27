@@ -14,7 +14,7 @@ class SampleGame : public Game {
 
   void initialize() override;
 
-  std::string const& getGameName() override { return "Sample Game"; }
+  std::string getGameName() const { return "Sample Game"; }
 
  private:
   void initializeMembers() {}

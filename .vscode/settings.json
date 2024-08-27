@@ -111,5 +111,5 @@
         "projectfiles/**": true
     },
     "java.configuration.updateBuildConfiguration": "automatic",
-    "cmake.sourceDirectory": "${workspaceFolder}/osx"
+    "cmake.sourceDirectory": "/Users/jonataschagas/Documents/c++/simple-2d-engine-demo/projects/osx"
 }

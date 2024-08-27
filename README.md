@@ -13,6 +13,7 @@ In this demo you can see:
 - How to build a *scene graph* where the children sprites behave according to the position/scale/orientation of parent Sprites
 - How to setup and use Shaders
 - How to play songs and sounds
+- How to render text
 
 When checking out the repo, make sure to pull the submodules too:
 
@@ -39,6 +40,7 @@ brew install cmake
 brew install glfw
 brew install sdl2
 brew install sdl2_mixer
+brew install freetype
 ```
 
 After installing all the dependencies, to build and run the game, use **cmake** and **make**:
